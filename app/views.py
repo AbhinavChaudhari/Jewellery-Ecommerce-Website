@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import random
 
 
+
 def getCategory(request):
     data = SubCategory.objects.all().values()
     cat = Category.objects.all().values()
@@ -79,8 +80,25 @@ def blogdetail(request):
 def login(request):
     return render(request,'login-register.html')
 
-def myaccount(request):
-    return render(request,"my-account.html")
+def newAddress(request):
+   
+    if request.method =="POST":
+        if "saveAddress" in request.POST:
+            add = Addresses()
+            add.user = request.user
+            add.first_name = request.POST["first_name"]
+            add.last_name = request.POST["last_name"]
+            add.address = request.POST["addr"]
+            add.mobileNo = request.POST["mobileNo"]
+            add.state = request.POST["state"]
+            add.city = request.POST["city"]
+            add.pin = request.POST["pincode"]
+
+            add.save()
+            return redirect('homepage')
+    else:
+        return render(request,"Address/newAddress.html")
+
 
 
 

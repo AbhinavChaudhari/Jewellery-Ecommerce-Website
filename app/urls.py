@@ -18,10 +18,13 @@ urlpatterns = [
     path('aboutus/',views.aboutus,name="aboutus"),
     path('checkout/',views.checkout,name="checkout"),
     path('contact/',views.contact,name="contact"),
-    path('blogdetail/',views.blogdetail,name="blogdetail"),
+    
+    path('newAddress/',views.newAddress,name="newAddress"),
    
     
     path('shop/<int:pk>',views.shop,name="shop"),
     path('wishlist',views.wishlist,name="wishlist"),
     path('cart/',views.cart,name="cart"),
+
+ 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

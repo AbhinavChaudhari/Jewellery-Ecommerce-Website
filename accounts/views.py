@@ -25,3 +25,5 @@ class CustomerRegistraitonView(View):
 
 def changepass(request):
     return render(request, 'changepassword.html')
+
+

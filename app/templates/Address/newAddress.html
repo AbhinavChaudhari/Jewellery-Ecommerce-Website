@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mainbody %}
+<main>
+    
+    
+
+    <!-- login register wrapper start -->
+    <div class="my-5">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                  
+
+                    <!-- Register Content Start -->
+                    <div class="col-lg-8 mx-auto">
+                        <div class="login-reg-form-wrap sign-up-form">
+                            <div class="section-title text-center">
+                                <h2 class="title">Add New Address</h2>
+                                 {% if messages %}
+                                 <hr>
+                            {% for message in messages %}
+                                <p {% if message.tags %}class="alert alert-{{message.tags}} alert-dismissible fade show my-2 mx-auto"{% endif %}>{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                                
+                            </div>
+                            <form action="#" method="post">{% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
+                                            <input type="text" placeholder="Enter your First Name" name="first_name" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
+                                            <input type="text" placeholder="Repeat your Last Name" name="last_name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-input-item">
+                                    <input type="text" placeholder="Enter your Mobile No without Prefix" name="mobileNo" required/>
+                                </div>
+                                <div class="single-input-item">
+                                    <textarea name="address" id="address" cols="30" rows="4" name="addr" placeholder="Enter Your Address Here"></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
+                                            <select name="state" id="state" name="state" >
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
+                                            <select name="city" id="city" name="city" ></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
+                                            <input type="text" placeholder="Enter your Pincode" name="pincode"  />
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                               
+                                <div class="single-input-item">
+                                    <button class="btn btn-sqr" name="saveAddress">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Register Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- login register wrapper end -->
+</main>
+
+
+{% endblock mainbody %}
+{% block cityjs %}
+    <script>
+
+        fetch("/static/city_data.json")
+            .then(response => response.json())
+            .then(data =>{
+                console.log(data);
+            })
+    </script>
+{% endblock cityjs %}
