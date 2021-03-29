@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+ {% block mainbody %}
+    <main>
+        
+
+        <!-- login register wrapper start -->
+        <div class="login-register-wrapper section-padding">
+            <div class="container">
+                <div class="member-area-from-wrap">
+                    <div class="row">
+                       
+                       
+
+                        <!-- Register Content Start -->
+                        <div class="col-lg-12">
+                            <div class="login-reg-form-wrap sign-up-form">
+                                <div class="section-title text-center">
+                                    <h2 class="title">Sign Up</h2>
+                                     {% if messages %}
+                                     <hr>
+                                {% for message in messages %}
+                                    <p {% if message.tags %}class="alert alert-{{message.tags}} alert-dismissible fade show my-2 mx-auto"{% endif %}>{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                                    
+                                </div>
+                                <hr class="mx-5">
+                                <form action="#" method="post">{% csrf_token %}
+                                    
+                                   
+                                    <div class="single-input-item">
+                                        <div class="row">
+                                            {% for fm in forms %}
+                                            <div class="col-lg-6 mt-2">{{fm.label_tag}}
+                                                {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br></div> {% endfor %}
+                                        </div>
+                                    </div>
+                                  
+                                   <hr class="mx-5 ">
+                                    <div class="single-input-item mt-3">
+                                        <div class="login-reg-form-meta">
+                                            <div class="remember-meta">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="subnewsletter">
+                                                    <label class="custom-control-label" for="subnewsletter">Agree Turms And Conditions</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if form.non_field_errors %}
+                                    {% for error in form.non_field_errors %}
+                                    
+                                        <p class="alert alert-danger my-3">{{error}}</p>
+                                    
+                                    {% endfor %}
+                                    {% endif %}
+
+
+                                    <div class="single-input-item">
+                                        <button class="btn btn-sqr">Register</button>
+                                    </div>
+                                </form>
+                                 <div class="row ">
+                                    <a href="{% url 'login' %}" class="single-input-item  mx-auto forget-createac ">You have account? - Login</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Register Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login register wrapper end -->
+    </main>
+
+    <!-- Scroll to top start -->
+  {% endblock mainbody %}
+    <!-- Scroll to Top End -->

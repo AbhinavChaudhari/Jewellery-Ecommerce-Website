@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block mainbody %}
+    <main>
+        <!-- breadcrumb area start -->
+  
+        <!-- breadcrumb area end -->
+
+        <!-- login register wrapper start -->
+        <div class="login-register-wrapper section-padding">
+            <div class="container">
+                <div class="member-area-from-wrap">
+                    <div class="row ">
+                        <!-- Login Content Start -->
+                        <div class="col-lg-6 mx-auto">
+                            <div class="login-reg-form-wrap">
+                               <div class="section-title text-center">
+                                    <h2 class="title">Login</h2>
+                                     {% if messages %}
+                                     <hr>
+                                {% for message in messages %}
+                                    <p {% if message.tags %}class="alert alert-{{message.tags}} alert-dismissible fade show my-2 mx-auto"{% endif %}>{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                                    
+                                </div>
+                                <form action="#" method="post">{% csrf_token %}
+                                    {% for fm in form %}
+                                    <div class="single-input-item">{{fm.label_tag}}
+                                       {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small><br>
+                                    </div>{% endfor %}
+                                   
+                                    <div class="single-input-item">
+                                        <div
+                                            class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                            
+                                            <a href="{% url 'password_reset' %}" class="forget-pwd ml-auto ">Forget Password?</a>
+                                        </div>
+                                    </div>
+                                      {% if form.non_field_errors %}
+                                    {% for error in form.non_field_errors %}
+                                    
+                                        <p class="alert alert-danger my-3">{{error}}</p>
+                                    
+                                    {% endfor %}
+                                    {% endif %}
+                                    <div class="single-input-item">
+                                        <button class="btn btn-sqr">Login</button>
+                                    </div>
+                                </form>
+                                <div class="row ">
+                                    <a href="{% url 'register' %}" class="single-input-item  mx-auto forget-createac ">Create An Account</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Login Content End -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login register wrapper end -->
+    </main>
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+{% endblock mainbody %}
