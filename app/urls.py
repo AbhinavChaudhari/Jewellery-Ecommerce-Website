@@ -19,9 +19,11 @@ urlpatterns = [
     path('checkout/',views.checkout,name="checkout"),
     path('contact/',views.contact,name="contact"),
     
+    # address 
     path('newAddress/',views.newAddress,name="newAddress"),
-   
-    
+    path('address/',views.address,name="address"),
+    path('adredit/<int:id>',views.Editadr,name="adr_edit"),
+
     path('shop/<int:pk>',views.shop,name="shop"),
     path('wishlist',views.wishlist,name="wishlist"),
     path('cart/',views.cart,name="cart"),

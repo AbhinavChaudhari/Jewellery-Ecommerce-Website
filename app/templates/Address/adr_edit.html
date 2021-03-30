@@ -15,25 +15,27 @@
                     <div class="col-lg-8 mx-auto">
                         <div class="login-reg-form-wrap sign-up-form">
                             <div class="section-title text-center">
-                                <h2 class="title">Add New Address</h2>
-                            
+                                <h2 class="title">Edit Address</h2>
+                          
                                 
                             </div>
                             <form action="#" method="post">{% csrf_token %}
+
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" placeholder="Enter your First Name" name="first_name" />
+                                            <input type="text" placeholder="Enter your First Name" name="first_name" value="{{adr.first_name}}"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" placeholder="Enter your Last Name" name="last_name" />
+                                            <input type="text" placeholder="Enter your Last Name" name="last_name" value="{{adr.last_name}}"/>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Enter your Mobile No without Prefix" name="mobileNo" />
+                                    <input type="text" placeholder="Enter your Mobile No without Prefix" name="mobileNo" value="{{adr.mobileNo}}"/>
                                 </div>
                                
                                 <div class="single-input-item">

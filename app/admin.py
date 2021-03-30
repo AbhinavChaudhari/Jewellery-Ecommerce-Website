@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Addresses)
 class AddressesAdmin(admin.ModelAdmin):
-    list_display =['id','city','state','pin','date']
+    list_display =['id','houseNo','area','landmark','city','state','pin','date']
 
 @admin.register(Category)
 class CatergoryAdmin(admin.ModelAdmin):

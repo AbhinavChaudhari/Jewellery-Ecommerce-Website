@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import CustomerRegistraitonForm,LoginForm
 from django.views import View
 from django.contrib import messages
@@ -20,6 +20,7 @@ class CustomerRegistraitonView(View):
         if form.is_valid():
             messages.success(request,'Congratulations... You succesufully registered ')
             form.save()
+            return redirect('homepage')
         return render(request, 'register/register.html',{'forms':form})
 
 

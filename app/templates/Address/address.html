@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mainbody %}
+<main>
+    
+    <!-- login register wrapper start -->
+    <div class="my-5">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                    <!-- Register Content Start -->
+                    <div class="col-lg-6 mx-auto">
+                        
+                            <div class="section-title text-center">
+                                <h2 class="title">All Addresses</h2>                                                        
+                            </div>
+                    </div>
+                    <!-- Register Content End -->
+                </div>
+                    <div class="row">
+                        <div class="col-lg-12 ">
+                            <a href="{% url 'newAddress' %}">
+                                <div class="text-center mb-3">
+                                <img src="{% static 'assets/img/addbtn.png' %}" alt="img" height="100px" class="bounce"  >
+                              <h5 class="mb-3">Add New Address</h5>
+                            </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        
+                       
+                        <!-- card start from here -->
+                        {% for i in adr %}
+                        <div class="col-lg-3">
+                            <div class="card py-4 ">
+                                <div class="mx-3">
+                                    <h3><strong>Address:</strong>{{forloop.counter}}</h3>
+                                    <hr>
+                                    <p><strong>Name :- </strong> {{i.first_name}} {{i.last_name}}</p>
+                                    <p><strong>Mobile No :- </strong> {{i.mobileNo}}</p>
+                                    <p><strong>Address :- </strong>{{i.houseNo}}, {{i.area}}, {{i.landmark}}</p>
+                                    <p><strong>state :- </strong> {{i.state}}</p>
+                                    <p><strong>city :- </strong> {{i.city}}</p>
+                                    <p><strong>pincode :- </strong> {{i.pin}}</p>
+                                    <div class="mt-3">
+                                       
+                                        <a href="{% url 'adr_edit' i.id %}" class="btn btn-primary py-2 px-3 bg-primary text-white">Edit</a>
+                                        <a href="" class="btn btn-danger py-2 px-3 bg-danger text-white">Delete</a>
+                                       
+                                       
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- card end here -->{% endfor %}
+                        
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- login register wrapper end -->
+</main>
+
+
+{% endblock mainbody %}
+

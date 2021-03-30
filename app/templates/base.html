@@ -120,7 +120,7 @@
                                             <ul class="dropdown">
                                                 
                                                 <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="{% url 'newAddress' %}">New Address</a></li>
+                                                <li><a href="{% url 'address' %}">Addresses</a></li>
                                                 <li><a href="{% url 'passwordchange' %}">Change Password</a></li>
                                                 <li><a href="{% url 'logout' %}">Logout</a></li>
                                             </ul>
@@ -145,7 +145,7 @@
                                 <div class="header-configure-area ">
                                     <ul class="nav justify-content-end  ">
                                   
-
+                                        {% if request.user.is_authenticated %}
                                         <li>
                                             <a href="wishlist.html">
                                                 <i class="pe-7s-like"></i>
@@ -158,7 +158,7 @@
                                                 <i class="pe-7s-shopbag"></i>
                                                 <div class="notification" id="cartvalue"></div>
                                             </a>
-                                        </li>
+                                        </li>{% endif %}
                                     </ul>
                                 </div>
                             </div>

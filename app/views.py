@@ -6,8 +6,36 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 import random
 import datetime
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def Editadr(request,id):
+    if request.method == "POST":
+        ad = Addresses.objects.get(id=id)
+        ad.first_name = request.POST["first_name"]
+        ad.last_name = request.POST["last_name"]
+        ad.mobileNo = request.POST["mobileNo"]
+        ad.houseNo = request.POST["houseNo"]
+        ad.area = request.POST["area"]
+        ad.landmark = request.POST["landmark"]
+        ad.city = request.POST["city"]
+        ad.state = request.POST["state"]
+        ad.pin = request.POST["pin"]
+        ad.date = datetime.datetime.today()
+        ad.save()
+        return redirect('address')
 
+    else:
+        adr = Addresses.objects.get(id=id)
+        return render(request, 'Address/adr_edit.html',{'adr':adr})
+
+@login_required
+def address(request):
+    user = request.user
+    adr = Addresses.objects.filter(user=user)
+    return render(request, 'Address/address.html',{'adr':adr})
+
+@login_required
 def newAddress(request):
     if request.method =="POST": 
         add = Addresses()
@@ -33,7 +61,8 @@ def newAddress(request):
 def getCategory(request):
     data = SubCategory.objects.all().values()
     cat = Category.objects.all().values()
-    cart = Cart.objects.all().values()
+    user = request.user
+    cart = Cart.objects.filter(user=user).values()
     return JsonResponse({'data':list(data),'cart':list(cart),'cat':list(cat)},safe=False)
 
 
@@ -59,6 +88,7 @@ def updateItem(request):
             return JsonResponse({"msg":f'Your {product.name} is added to Cart'},safe=False)
     elif jd["action"]=='remove':        # Remove product from Cart
         product = Product.objects.get(id=jd['productId'])
+        
         cart = Cart.objects.filter(product = product)
         cart.delete()
         return JsonResponse({"msg":f'Your {product.name} is Removed'},safe=False)
@@ -112,5 +142,6 @@ def wishlist(request):
     return render(request,'wishlist.html')
 
 def cart(request):
-    cart = Cart.objects.all()
+    user = request.user
+    cart = Cart.objects.filter(user=user)
     return render(request,"cart.html",{'carts':cart})
