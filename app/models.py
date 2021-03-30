@@ -5,18 +5,18 @@ from django.contrib.auth.models import User
 
 
 class Addresses(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     first_name = models.CharField(max_length=100,null=True,blank=True)
     last_name = models.CharField(max_length=100,null=True,blank=True)
-    address = models.TextField(max_length=500)
-    mobileNo = models.CharField(max_length=12,null=True,blank=True)
+    houseNo = models.CharField(max_length=200,null=True,blank=True)
+    area = models.CharField(max_length=200,null=True,blank=True)
+    landmark = models.CharField(max_length=200,null=True,blank=True)
+    mobileNo = models.CharField(max_length=120,null=True,blank=True)
+   
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    pin = models.CharField(max_length=10)
+    pin = models.CharField(max_length=100)
     date = models.DateField(auto_created=True)
-
-    def __str__(self):
-        return self.first_name 
 
 
 

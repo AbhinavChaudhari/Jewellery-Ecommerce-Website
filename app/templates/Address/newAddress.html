@@ -35,16 +35,24 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" placeholder="Repeat your Last Name" name="last_name" />
+                                            <input type="text" placeholder="Enter your Last Name" name="last_name" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Enter your Mobile No without Prefix" name="mobileNo" required/>
+                                    <input type="text" placeholder="Enter your Mobile No without Prefix" name="mobileNo" />
+                                </div>
+                               
+                                <div class="single-input-item">
+                                    <input type="text" placeholder="Flat, House no., Building, Company, Apartment" name="house" />
                                 </div>
                                 <div class="single-input-item">
-                                    <textarea name="address" id="address" cols="30" rows="4" name="addr" placeholder="Enter Your Address Here"></textarea>
+                                    <input type="text" placeholder="Area, Colony, Street, Sector, Village" name="area" />
                                 </div>
+                                <div class="single-input-item">
+                                    <input type="text" placeholder="Enter Your Landmark" name="landmark" />
+                                </div>
+                             
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -119,7 +127,9 @@
             //  
                $("#citylist").append(`<option value="${allcity[i]}"></option>`)
            
-            }                
+            }
+
+                
             })
 
     </script>

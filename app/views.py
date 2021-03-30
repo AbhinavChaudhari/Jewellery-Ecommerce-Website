@@ -1,11 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import View
 from .models import *
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 import random
+import datetime
 
+
+def newAddress(request):
+    if request.method =="POST": 
+        add = Addresses()
+        user = request.user
+        add.user = user
+        add.first_name = request.POST["first_name"]
+        add.last_name = request.POST["last_name"]
+        add.houseNo = request.POST["house"]
+        add.area = request.POST["area"]
+        add.landmark = request.POST["landmark"]
+        add.mobileNo = request.POST["mobileNo"]
+        add.addr = request.POST["addr"]
+        add.state = request.POST["state"]
+        add.city = request.POST["city"]
+        add.pin = request.POST["pincode"]
+        add.date = datetime.datetime.today()
+        add.save()
+        return redirect('homepage')
+    else:
+        return render(request,"Address/newAddress.html")
 
 
 def getCategory(request):
@@ -80,24 +102,6 @@ def blogdetail(request):
 def login(request):
     return render(request,'login-register.html')
 
-def newAddress(request):
-   
-    if request.method =="POST":
-        if "saveAddress" in request.POST:
-            add = Addresses()
-            add.user = request.user
-            add.first_name = request.POST["first_name"]
-            add.last_name = request.POST["last_name"]
-            add.address = request.POST["addr"]
-            add.mobileNo = request.POST["mobileNo"]
-            add.state = request.POST["state"]
-            add.city = request.POST["city"]
-            add.pin = request.POST["pincode"]
-
-            add.save()
-            return redirect('homepage')
-    else:
-        return render(request,"Address/newAddress.html")
 
 
 
