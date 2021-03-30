@@ -154,8 +154,24 @@ def cart(request):
     print(total)
     return render(request,"cart.html",{'carts':cart,'total':total})
 
+@csrf_exempt
 def get_qty_update(request):
     if request.is_ajax():
-        data = request.GET.get('data')
-        print(data)
-        return JsonResponse({'data':"working"})
+        data =  request.POST.get('data')
+        jd = json.loads(data)
+        if jd['action'] =="add":
+            prid = int(jd['productId'])
+            cart = Cart.objects.get(id=prid,user=request.user)
+            cart.qty = int(cart.qty) +int(1)
+            cart.save()
+            return JsonResponse({'data':"qty increament"})
+        
+        elif jd['action'] =="dec":
+            prid = int(jd['productId'])
+            cart = Cart.objects.get(id=prid,user=request.user)
+        
+            if cart.qty == '1':
+                return JsonResponse({'data':"We cannot reduce value"})
+            cart.qty = int(cart.qty) - int(1)
+            cart.save()
+            return JsonResponse({'data':"qty decrement"})

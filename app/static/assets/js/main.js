@@ -477,21 +477,32 @@
 			var sub = (parseFloat($(`#D_price${id}`).text()) * newVal).toFixed(2)
 			
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url : "/get-qty-update/",
-				data: {'pr_id' :id},
+				headers:{"X-CSRFToken":getCookie('csrftoken')},
+				data: {data:JSON.stringify({'productId':id,'action':"add"})},
+				DataType:JSON,
 				success:function(data){
-					console.log(data);
+					
+					location.reload();
 				}
 			})
-
-
         }
 		 else {
             // Don't allow decrementing below zero
             if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
 				var sub = (parseFloat($(`#D_price${id}`).text()) * newVal).toFixed(2)
+				$.ajax({
+					type: "POST",
+					url : "/get-qty-update/",
+					headers:{"X-CSRFToken":getCookie('csrftoken')},
+					data: {data:JSON.stringify({'productId':id,'action':"dec"})},
+					DataType:JSON,
+					success:function(data){
+						location.reload();
+					}
+				})
             } else {
                 newVal = 1;
 				sub = $(`#D_price${id}`).text()

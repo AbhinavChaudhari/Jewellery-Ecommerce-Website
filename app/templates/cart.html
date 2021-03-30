@@ -53,7 +53,7 @@
                                             <td class="pro-quantity">
                                                 <div class="pro-qty" id="{{cart.id}}"><span class="dec qtybtn" >-</span><input disabled class="qtyval" type="text" value="{{cart.qty}}" ><span class="inc qtybtn" >+</span></div>
                                             </td>
-                                                {% if cart.qty == 2 %}
+                                                {% if cart.qty >= 2 %}
                                             <td class="pro-subtotal"><span id='Subtotal{{cart.id}}'>{{cart.qty|mul:cart.product.D_price }}</span></td>
                                             {% else %}
                                             <td class="pro-subtotal"><span id='Subtotal{{cart.id}}'>{{cart.product.D_price}}</span></td>
