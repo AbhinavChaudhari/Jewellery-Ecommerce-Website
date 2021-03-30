@@ -51,7 +51,7 @@
                                             <td class="pro-title"><a href="#">{{cart.product.name}}</a></td>
                                             <td class="pro-price"><span class='D_price' id="D_price{{cart.id}}" >{{cart.product.D_price}}</span></td>
                                             <td class="pro-quantity">
-                                                <div class="pro-qty" id="{{cart.id}}"><span class="dec qtybtn" >-</span><input class="qtyval" type="text" value="{{cart.qty}}"><span class="inc qtybtn" >+</span></div>
+                                                <div class="pro-qty" id="{{cart.id}}"><span class="dec qtybtn" >-</span><input disabled class="qtyval" type="text" value="{{cart.qty}}" ><span class="inc qtybtn" >+</span></div>
                                             </td>
                                                 {% if cart.qty == 2 %}
                                             <td class="pro-subtotal"><span id='Subtotal{{cart.id}}'>{{cart.qty|mul:cart.product.D_price }}</span></td>
@@ -88,15 +88,15 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
-                                                <td>$230</td>
+                                                <td ><span>₹</span><span class='ssbt' id="ssbt">{{total}}</span></td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping</td>
-                                                <td>$70</td>
+                                                <td>₹70</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">$300</td>
+                                                <td class="total-amount"><span>₹</span>{{total|add:70}}</td>
                                             </tr>
                                         </table>
                                     </div>

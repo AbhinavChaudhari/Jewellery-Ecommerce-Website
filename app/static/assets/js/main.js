@@ -461,53 +461,31 @@
 
 	// quantity change js
  
-	$('.qtyval').on('onchange', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        var id = this.parentNode.id;
-		console.log(id);
-		
-        
-		
-		
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-			
-			var sub = (parseFloat($(`#D_price${id}`).text()) * newVal).toFixed(2)
-			console.log(sub);
-			
-        }
-		 else {
-            // Don't allow decrementing below zero
-            if (oldValue > 1) {
-                var newVal = parseFloat(oldValue) - 1;
-				var sub = (parseFloat($(`#D_price${id}`).text()) * newVal).toFixed(2)
-            } else {
-                newVal = 1;
-				sub = $(`#D_price${id}`).text()
-            }
-        }
-        $button.parent().find('input').val(newVal);
-		
-		document.getElementById(`Subtotal${id}`).innerHTML = sub
-
-	});
+	
 	
     $('.qtybtn').on('click', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
         var id = this.parentNode.id;
 		console.log(id);
+
 		
-        
-		
+       
 		
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
-			
 			var sub = (parseFloat($(`#D_price${id}`).text()) * newVal).toFixed(2)
-			console.log(sub);
 			
+			$.ajax({
+				type: "GET",
+				url : "/get-qty-update/",
+				data: {'pr_id' :id},
+				success:function(data){
+					console.log(data);
+				}
+			})
+
+
         }
 		 else {
             // Don't allow decrementing below zero
@@ -520,8 +498,12 @@
             }
         }
         $button.parent().find('input').val(newVal);
+	
 		
 		document.getElementById(`Subtotal${id}`).innerHTML = sub
+		
+	
+		
 
 	});
 

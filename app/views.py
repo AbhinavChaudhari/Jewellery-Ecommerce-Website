@@ -144,4 +144,18 @@ def wishlist(request):
 def cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
-    return render(request,"cart.html",{'carts':cart})
+    total = 0
+    for i in cart:
+        if i.qty <= 1:
+            total = total + i.product.D_price
+ 
+        else:
+            total = total + (i.product.D_price * i.qty)
+    print(total)
+    return render(request,"cart.html",{'carts':cart,'total':total})
+
+def get_qty_update(request):
+    if request.is_ajax():
+        data = request.GET.get('data')
+        print(data)
+        return JsonResponse({'data':"working"})

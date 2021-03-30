@@ -27,6 +27,7 @@ urlpatterns = [
     path('shop/<int:pk>',views.shop,name="shop"),
     path('wishlist',views.wishlist,name="wishlist"),
     path('cart/',views.cart,name="cart"),
+    path('get-qty-update/',views.get_qty_update,name="get-qty-update")
 
  
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
