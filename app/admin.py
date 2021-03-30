@@ -29,3 +29,4 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(MainCaraousalAd)
 class MainCaraousalAdAdmin(admin.ModelAdmin):
     list_display=['id','FirstLine','date','visible']
+
