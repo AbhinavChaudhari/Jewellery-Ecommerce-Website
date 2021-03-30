@@ -20,11 +20,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display =['id','qty',]
+    list_display =['id','qty','user','product']
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display =['id']
+    list_display =['id','subtotal','shipping','Total','status']
 
 @admin.register(MainCaraousalAd)
 class MainCaraousalAdAdmin(admin.ModelAdmin):

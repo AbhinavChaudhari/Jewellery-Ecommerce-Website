@@ -73,12 +73,13 @@ STATUS_CHOICES=(
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     address = models.ForeignKey(Addresses,on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    qty = models.PositiveIntegerField(default=1)
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE ,null=True,blank=True)
+    subtotal = models.IntegerField(null=True,blank=True )
+    shipping = models.IntegerField(null=True,blank=True)
+    Total = models.IntegerField(null=True,blank=True)
     orderDate = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=100 ,choices=STATUS_CHOICES,default='Pending')
-    def __str__(self):
-        return self.id
+  
     
 
 class Testimonial(models.Model):

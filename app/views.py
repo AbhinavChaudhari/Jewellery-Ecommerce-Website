@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import random
 import datetime
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required
 def Editadr(request,id):
@@ -15,12 +16,12 @@ def Editadr(request,id):
         ad.first_name = request.POST["first_name"]
         ad.last_name = request.POST["last_name"]
         ad.mobileNo = request.POST["mobileNo"]
-        ad.houseNo = request.POST["houseNo"]
+        ad.houseNo = request.POST["house"]
         ad.area = request.POST["area"]
         ad.landmark = request.POST["landmark"]
         ad.city = request.POST["city"]
         ad.state = request.POST["state"]
-        ad.pin = request.POST["pin"]
+        ad.pin = request.POST["pincode"]
         ad.date = datetime.datetime.today()
         ad.save()
         return redirect('address')
@@ -46,14 +47,13 @@ def newAddress(request):
         add.houseNo = request.POST["house"]
         add.area = request.POST["area"]
         add.landmark = request.POST["landmark"]
-        add.mobileNo = request.POST["mobileNo"]
-        add.addr = request.POST["addr"]
+        add.mobileNo = request.POST["mobileNo"]       
         add.state = request.POST["state"]
         add.city = request.POST["city"]
         add.pin = request.POST["pincode"]
         add.date = datetime.datetime.today()
         add.save()
-        return redirect('homepage')
+        return redirect('address')
     else:
         return render(request,"Address/newAddress.html")
 
@@ -93,11 +93,14 @@ def updateItem(request):
         cart.delete()
         return JsonResponse({"msg":f'Your {product.name} is Removed'},safe=False)
 
+
 def shop(request,pk):
     if request.method =="GET":
         subcategory = SubCategory.objects.get(id = pk)
         product = Product.objects.filter(subCategory=subcategory)
     return render(request,"shop.html",{'product':product,"cat":subcategory})
+
+
 
 class ProductDetailView(View):
     def get(self,request,pk):
@@ -105,6 +108,8 @@ class ProductDetailView(View):
         rlt = Product.objects.filter(subCategory=product.subCategory)
         
         return render(request,"product-details.html",{"product":product,'rlt':rlt})
+
+
 
 class HomepageView(View):
     def get(self,request):
@@ -120,8 +125,44 @@ class HomepageView(View):
 def aboutus(request):
     return render(request,"about-us.html")
 
+
+@login_required
 def checkout(request):
-    return render(request,"checkout.html")
+    total = 0
+    shipping =70
+    user = request.user
+    cart = Cart.objects.filter(user =user)
+        
+    for i in cart:
+        if i.qty <= 1:
+            total = total + i.product.D_price
+    
+        else:
+            total = total + (i.product.D_price * i.qty)
+    if request.method =="POST":
+        odr= Order()
+        
+        ids=request.POST['adr']
+        adrs = Addresses.objects.get(user=user,id=ids)
+        odr.user = user 
+        odr.address = adrs
+        # odr.cart = Cart.objects.get(user=user)
+        odr.Total = total+shipping
+        odr.shipping = shipping
+        odr.subtotal =total
+        odr.status ='Pending'
+        odr.save()
+        return redirect("homepage")
+
+    else:
+        # to show  details of in checkout page 
+        
+        adr = Addresses.objects.filter(user=user)
+        
+        return render(request,"checkout.html",{'adr':adr,'cart':cart,"subtotal":total})
+
+
+
 
 def contact(request):
     return render(request,'contact-us.html')
@@ -151,8 +192,10 @@ def cart(request):
  
         else:
             total = total + (i.product.D_price * i.qty)
-    print(total)
+  
     return render(request,"cart.html",{'carts':cart,'total':total})
+
+
 
 @csrf_exempt
 def get_qty_update(request):

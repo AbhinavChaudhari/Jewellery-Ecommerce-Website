@@ -39,20 +39,20 @@
                                 </div>
                                
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Flat, House no., Building, Company, Apartment" name="house" />
+                                    <input type="text" placeholder="Flat, House no., Building, Company, Apartment" name="house" value="{{adr.houseNo}}" />
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Area, Colony, Street, Sector, Village" name="area" />
+                                    <input type="text" placeholder="Area, Colony, Street, Sector, Village" name="area" value="{{adr.area}}" />
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="text" placeholder="Enter Your Landmark" name="landmark" />
+                                    <input type="text" placeholder="Enter Your Landmark" name="landmark" value="{{adr.landmark}}"/>
                                 </div>
                              
 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" class="state" id="state" list="dataList" name="state" placeholder="Select State From List">
+                                            <input type="text" class="state" id="state" list="dataList" name="state" placeholder="Select State From List" value="{{adr.state}}">
                                            <datalist id="dataList">
 
                                             </datalist>
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" class="city" id="city" list="citylist" name="city" placeholder="Select City From List">
+                                            <input value="{{adr.city}}" type="text" class="city" id="city" list="citylist" name="city" placeholder="Select City From List">
                                             <datalist id="citylist">
  
                                              </datalist>
@@ -72,7 +72,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="text" placeholder="Enter your Pincode" name="pincode"  />
+                                            <input type="text" placeholder="Enter your Pincode" name="pincode" value="{{adr.pin}}" />
                                         </div>
                                     </div>
                                   
