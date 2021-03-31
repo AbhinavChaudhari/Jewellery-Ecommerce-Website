@@ -10,6 +10,7 @@ for (i = 0; i < updateBtns.length; i++){
         // console.log("user",user);
         if (user ==="AnonymousUser"){
             console.log("user is AnonymousUser");
+            alert("Login First ")
         }else{
             addToCart(productId,action)
         }

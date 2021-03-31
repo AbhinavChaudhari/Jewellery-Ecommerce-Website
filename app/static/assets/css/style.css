@@ -2605,6 +2605,14 @@ textarea:focus {
   color: #fff;
   background-color: #222222;
 }
+.ftnf{
+  font-size: 18px;
+  text-transform: capitalize;
+  background-color: #F7F7F7;
+  margin: 15px 2px;
+  letter-spacing: 5px;
+  
+}
 
 .hero-overlay {
   position: relative;
@@ -2617,7 +2625,7 @@ textarea:focus {
   height: 100%;
   content: '';
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.3);
   display: none;
 }
 

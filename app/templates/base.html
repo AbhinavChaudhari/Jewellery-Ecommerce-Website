@@ -185,13 +185,16 @@
                                     <img src="{% static 'assets/img/logo/logo1.gif' %}" alt="Brand Logo">
                                 </a>
                             </div>
+
                             <div class="mobile-menu-toggler">
+                                {% if user.is_authenticated %}
                                 <div class="mini-cart-wrap">
                                     <a href="cart.html">
                                         <i class="pe-7s-shopbag"></i>
-                                        <div class="notification">0</div>
+                                        <div class="notification" id="mobilecart"></div>
                                     </a>
                                 </div>
+                                {% endif %}
                                 <button class="mobile-menu-btn">
                                     <span></span>
                                     <span></span>
@@ -244,7 +247,8 @@
                                     </ul>
                                 </li>
                                 
-                                <li><a href="contact-us.html">Contact us</a></li>
+                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                                <li><a href="{% url 'aboutus' %}">About us</a></li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -253,21 +257,37 @@
 
                     <div class="mobile-settings">
                         <ul class="nav">
-                           
+                            {% if user.is_authenticated %}
                             <li>
+                               
                                 <div class="dropdown mobile-top-dropdown">
-                                    <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                    <a class="dropdown-toggle ftnf" id="myaccount" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
                                         My Account
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="myaccount">
-                                        <a class="dropdown-item" href="my-account.html">my account</a>
-                                        <a class="dropdown-item" href="login-register.html"> login</a>
-                                        <a class="dropdown-item" href="login-register.html">register</a>
+                                        
+                                        <a class="dropdown-item ftnf" href="{% url 'homepage' %}">my account</a>
+                                        <a class="dropdown-item ftnf" href="{% url 'address' %}">Addresses</a>
+                                        <a class="dropdown-item ftnf" href="{% url 'passwordchange' %}">Change Password</a>
+                                        <a class="dropdown-item ftnf" href="{% url 'logout' %}"><strong>Logout</strong></a>
+                                        
+                                       
+                                        
                                     </div>
                                 </div>
+
                             </li>
+                                {% else %}
+                                <li>
+                                
+                                    <a class="dropdown-item ftnf" href="{% url 'login' %}"> login</a>
+                                            <a class="dropdown-item ftnf" href="{% url 'register' %}">register</a>
+
+                                </li>
+                                
+                                {% endif %}
 
                         </ul>
                     </div>
@@ -570,12 +590,19 @@
 
                 category =response.cat
                 cat = response.data
-                cart = response.cart.length
+                
 
                
                 
                 
-                document.getElementById('cartvalue').innerHTML = cart
+               if(response.cart.length == 0){
+                 
+                 console.log('cart disabled');
+               }else{
+                    var cart = response.cart.length
+                    document.getElementById('cartvalue').innerHTML = cart
+                    document.getElementById('mobilecart').innerHTML = cart
+               }
 
                 for(let i= 0; i< category.length;i++){
                     var category_id = category[i].id

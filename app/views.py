@@ -62,7 +62,10 @@ def getCategory(request):
     data = SubCategory.objects.all().values()
     cat = Category.objects.all().values()
     user = request.user
-    cart = Cart.objects.filter(user=user).values()
+    if user.is_authenticated:
+        cart = Cart.objects.filter(user=user).values()
+    else:
+        cart = {}
     return JsonResponse({'data':list(data),'cart':list(cart),'cat':list(cat)},safe=False)
 
 
