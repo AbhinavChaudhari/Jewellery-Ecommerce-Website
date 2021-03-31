@@ -27,8 +27,19 @@
         <!-- cart main wrapper start -->
         <div class="cart-main-wrapper section-padding">
             <div class="container">
+                {% if carts.count == 0 %}
+                    <div class="row ">
+                        <div class="col-lg-6 mx-auto">
+                            <div class="img text-center">
+                                <img src="{% static 'assets/img/cart/cart2.gif' %}" alt="" srcset="">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
                 <div class="section-bg-color">
                     <div class="row">
+
+
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
                             <div class="cart-table table-responsive">
@@ -72,9 +83,7 @@
                                         <button class="btn btn-sqr">Apply Coupon</button>
                                     </form>
                                 </div>
-                                <div class="cart-update">
-                                    <a href="#" class="btn btn-sqr">Update Cart</a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -105,7 +114,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+                {% endif %}
             </div>
         </div>
         <!-- cart main wrapper end -->

@@ -332,7 +332,7 @@
                                                             title="Quick View"><i class="pe-7s-search"></i></span></a>
                                                 </div>
                                                 <div class="cart-hover">
-                                                    <button class="btn btn-cart">add to cart</button>
+                                                    <button class="btn btn-cart update-cart" data-action="add" data-product={{i.id}}>add to cart</button>
                                                 </div>
                                             </figure>
                                             <div class="product-caption text-center">
@@ -429,7 +429,7 @@
                             {% for i in product %}
                             <div class="product-item">
                                 <figure class="product-thumb">
-                                    <a href="product-details.html">
+                                    <a href="{% url 'productDetailView' i.id %}">
                                         <img class="pri-img" src="{{i.image_1.url}}" alt="product">
                                         <img class="sec-img" src="{{i.image_1.url}}" alt="product">
                                     </a>
@@ -453,16 +453,16 @@
                                                     class="pe-7s-search"></i></span></a>
                                     </div>
                                     <div class="cart-hover">
-                                        <button class="btn btn-cart">add to cart</button>
+                                        <button class="btn btn-cart update-cart" data-action="add" data-product={{i.id}}>add to cart</button>
                                     </div>
                                 </figure>
                                 <div class="product-caption text-center">
                                     <div class="product-identity">
-                                        <p class="manufacturer-name"><a href="product-details.html">{{i.subCategory.name}}</a></p>
+                                        <p class="manufacturer-name"><a href="{% url 'productDetailView' i.id %}">{{i.subCategory.name}}</a></p>
                                     </div>
                                    
                                     <h6 class="product-name">
-                                        <a href="product-details.html">{{i.name}}</a>
+                                        <a href="{% url 'productDetailView' i.id %}">{{i.name}}</a>
                                     </h6>
                                     <div class="price-box">
                                         <span class="price-regular">{{i.D_price}}</span>

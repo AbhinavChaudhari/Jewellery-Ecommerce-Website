@@ -45,22 +45,7 @@
                         <div class="checkoutaccordion" id="checkOutAccordion">
                             
 
-                            <div class="card">
-                                <h6>Have A Coupon? <span data-toggle="collapse" data-target="#couponaccordion">Click
-                                        Here To Enter Your Code</span></h6>
-                                <div id="couponaccordion" class="collapse" data-parent="#checkOutAccordion">
-                                    <div class="card-body">
-                                        <div class="cart-update-option">
-                                            <div class="apply-coupon-wrapper">
-                                                <form action="#" method="post" class=" d-block d-md-flex">
-                                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                                    <button class="btn btn-sqr">Apply Coupon</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!-- Checkout Login Coupon Accordion End -->
                     </div>
@@ -88,7 +73,7 @@
                                         <div class="cart border mx-3 my-3 " style="background-color: #FFFFFF;">
                                             <div class="row">
                                                 <div class="col-lg-6 mx-3 my-3">
-                                                    <h5> <input type="radio" id="adr" name="adr" value="{{i.id}}" class="mr-2" {% if forloop.counter == 1 %}checked{% endif %}>Address {{forloop.counter}}</h5>
+                                                    <h5> <input type="radio" id="adr{{i.id}}" name="adr" value="{{i.id}}" class="mr-2" {% if forloop.counter == 1 %}checked{% endif %}>Address {{forloop.counter}}</h5>
                                                     <hr>
                                                     <span><strong>{{i.first_name}} {{i.last_name}}</strong></span><br>
                                                     <span><strong>{{i.mobileNo}}</strong></span><br>
@@ -134,7 +119,7 @@
 
                                         {% for c in cart %}
                                             <tr>
-                                                <td><a href="product-details.html">{{c.product.name}} <strong> ×
+                                                <td><a href="{% url 'productDetailView' c.product.id %}">{{c.product.name}} <strong> ×
                                                             {{c.qty}}</strong></a>
                                                 </td>
                                                 <td>₹{{c.qty|mul:c.product.D_price}}</td>

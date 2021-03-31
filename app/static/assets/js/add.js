@@ -33,6 +33,23 @@ function addToCart(productId,action){
        
         
     })
+    $.ajax({
+        type:"GET",
+        url:"/getCartQty/",
+        success:function (response) {
+
+           if(response.cart.length == 0){
+             
+             console.log('cart disabled');
+           }else{
+                var cart = response.cart.length
+                document.getElementById('cartvalue').innerHTML = cart
+                document.getElementById('mobilecart').innerHTML = cart
+           }
+        }
+    })
+
+   
 }
 
 function getCookie(name) {

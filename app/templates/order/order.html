@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block mainbody %}
+
+ <!-- cart main wrapper start -->
+        <div class="cart-main-wrapper section-padding">
+            <div class="container">
+                <div class="section-bg-color">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                         <div class="section-title text-center">
+                                    <h2 class="title">Orders</h2>
+                                  
+                                    
+                                </div>
+                            <!-- Cart Table Area -->
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-title">Product</th>
+                                            <th class="pro-price">Price</th>
+                                            <th class="pro-quantity">Quantity</th>
+                                            <th class="pro-subtotal">Subtotal</th>
+                                            <th class="pro-subtotal">Status</th>
+                                            <th class="pro-remove">Cancel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in order %}
+                                        <tr>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
+                                                        src="{{i.product.image_1.url}}" width ="50px" height="50px" alt="image of  {{i.product.name}}" /></a></td>
+                                            <td class="pro-title"><a href="{% url 'productDetailView' i.product.id %}"><strong>{{i.product.name}}</strong></a></td>
+                                            <td class="pro-price"><span>₹{{i.product.D_price}}</span></td>
+                                            <td class="pro-price"><span>{{i.qty}}</span></td>
+                                            <td class="pro-subtotal"><span>₹{{i.qty|mul:i.product.D_price}}</span></td>
+                                            <td class="pro-subtotal"><span>{{i.status}}</span></td>
+                                            <td class="pro-remove"><a href="homepage">Cancel</i></a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Cart Update Option -->
+                           
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!-- cart main wrapper end -->
+{% endblock mainbody %}

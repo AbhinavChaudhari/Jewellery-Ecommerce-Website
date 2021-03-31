@@ -18,6 +18,7 @@ urlpatterns = [
     path('aboutus/',views.aboutus,name="aboutus"),
     path('checkout/',views.checkout,name="checkout"),
     path('contact/',views.contact,name="contact"),
+    path('order/',views.order,name="order"),
     
     # address 
     path('newAddress/',views.newAddress,name="newAddress"),
@@ -27,6 +28,9 @@ urlpatterns = [
     path('shop/<int:pk>',views.shop,name="shop"),
     path('wishlist',views.wishlist,name="wishlist"),
     path('cart/',views.cart,name="cart"),
+
+    path('getCartQty/',views.getCartQty,name="getCartQty"),
+    
     path('get-qty-update/',views.get_qty_update,name="get-qty-update")
 
  

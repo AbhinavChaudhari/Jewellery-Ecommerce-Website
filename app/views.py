@@ -57,6 +57,16 @@ def newAddress(request):
     else:
         return render(request,"Address/newAddress.html")
 
+def getCartQty(request):
+    user = request.user
+    if user.is_authenticated:
+        
+        cart = Cart.objects.filter(user=user).values()
+    else:
+        cart = {}
+    return JsonResponse({'cart':list(cart)},safe=False)
+        
+
 
 def getCategory(request):
     data = SubCategory.objects.all().values()
@@ -68,7 +78,7 @@ def getCategory(request):
         cart = {}
     return JsonResponse({'data':list(data),'cart':list(cart),'cat':list(cat)},safe=False)
 
-
+@login_required
 def updateItem(request):
     data =  request.POST.get('data')
     jd = json.loads(data)
@@ -129,6 +139,12 @@ def aboutus(request):
     return render(request,"about-us.html")
 
 
+@login_required()
+def order(request):
+    user = request.user
+    order = Order.objects.filter(user=user)
+    return render(request,'order/order.html',{'order':order})
+
 @login_required
 def checkout(request):
     total = 0
@@ -147,14 +163,12 @@ def checkout(request):
         
         ids=request.POST['adr']
         adrs = Addresses.objects.get(user=user,id=ids)
-        odr.user = user 
-        odr.address = adrs
-        # odr.cart = Cart.objects.get(user=user)
-        odr.Total = total+shipping
-        odr.shipping = shipping
-        odr.subtotal =total
-        odr.status ='Pending'
-        odr.save()
+        
+        cart = Cart.objects.filter(user=user)
+        
+        for c in cart:
+            Order(user=user, product=c.product,qty=c.qty ,address=adrs,Total=total+shipping,shipping=shipping,subtotal=total,status="Pending").save()
+            c.delete()
         return redirect("homepage")
 
     else:

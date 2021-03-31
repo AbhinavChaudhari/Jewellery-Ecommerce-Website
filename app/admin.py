@@ -24,7 +24,7 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display =['id','subtotal','shipping','Total','status']
+    list_display =['id','subtotal','shipping','Total','status','user','qty']
 
 @admin.register(MainCaraousalAd)
 class MainCaraousalAdAdmin(admin.ModelAdmin):

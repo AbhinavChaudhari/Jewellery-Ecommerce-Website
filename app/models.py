@@ -63,6 +63,7 @@ class Cart(models.Model):
     
 
 STATUS_CHOICES=(
+    ('Pending','Pending'),
     ('Accepted','Accepted'),
     ('Packed','Packed'),
     ('On The Way','On The Way'),
@@ -73,8 +74,9 @@ STATUS_CHOICES=(
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     address = models.ForeignKey(Addresses,on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart,on_delete=models.CASCADE ,null=True,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE ,null=True,blank=True)
     subtotal = models.IntegerField(null=True,blank=True )
+    qty = models.IntegerField(null=True,blank=True )
     shipping = models.IntegerField(null=True,blank=True)
     Total = models.IntegerField(null=True,blank=True)
     orderDate = models.DateField(auto_now_add=True)
